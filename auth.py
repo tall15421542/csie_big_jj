@@ -68,8 +68,10 @@ def register():
 
 @bp.route("/login", methods=("GET", "POST"))
 def login():
-    default_username = "tall1542"
-    return render_template("auth/login.html")
+	if(request.method == 'POST'):
+		return redirect(url_for('auth.home'))
+	elif(request.method == 'GET'):
+		return render_template("auth/login.html")
 
 
 @bp.route("/", methods=("GET", "POST"))
@@ -82,7 +84,13 @@ def home():
 		else:
 			pass
 	
-	return render_template("auth/home.html")
+	return render_template("auth/index.html")
+
+
+@bp.route("/main", methods=("GET", "POST"))
+def page1():
+	return render_template("auth/page1.html")
+
 
 @bp.route("/logout")
 def logout():
