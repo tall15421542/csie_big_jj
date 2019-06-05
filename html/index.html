@@ -11,10 +11,10 @@
     <title>台大新體健身房</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./res/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="./res/css/gym.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/gym.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -42,14 +42,14 @@
                     <a class="nav-link" href="#">本館資訊 <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="./res/page1.html">器材租借</a>
+                    <a class="nav-link" href="{{ url_for('auth.page1') }}">器材租借</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">器材報到</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="./res/leg_check.html">腿部伸張機</a>
-                        <a class="dropdown-item" href="./res/bottomBodyCheck.html">深蹲架</a>
-                        <a class="dropdown-item" href="./res/chestCheck.html">握推機</a>
+                        <a class="dropdown-item" href="{{ url_for('auth.leg_check') }}">腿部伸張機</a>
+                        <a class="dropdown-item" href="{{ url_for('auth.bottomBodyCheck') }}">深蹲架</a>
+                        <a class="dropdown-item" href="{{ url_for('auth.chestCheck') }}">握推機</a>
                     </div>
                 </li>
             </ul>
@@ -60,13 +60,15 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>
-        window.jQuery || document.write('<script src="./res/js/jquery-slim.min.js"><\/script>')
+        window.jQuery || document.write('<script src="{{ url_for('
+            static ', filename='
+            js / jquery - slim.min.js ') }}"><\/script>')
     </script>
-    <script src="./res/js/popper.min.js"></script>
-    <script src="./res/js/bootstrap.min.js"></script>
-    <script src="./res/js/holder.min.js"></script>
-    <script src="./res/js/jquery.countdown.js"></script>
-    <script src="./res/js/control.js"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/holder.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.countdown.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/control.js') }}"></script>
 </body>
 
 
