@@ -48,9 +48,9 @@
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">器材報到</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="legCheck.html">腿部伸張機</a>
+                        <a class="dropdown-item" href="{{ url_for('auth.legCheck') }}">腿部伸張機</a>
                         <a class="dropdown-item" href="#">深蹲架</a>
-                        <a class="dropdown-item" href="chestCheck.html">握推機</a>
+                        <a class="dropdown-item" href="{{ url_for('auth.chestCheck') }}">握推機</a>
                     </div>
                 </li>
             </ul>

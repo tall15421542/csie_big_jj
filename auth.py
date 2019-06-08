@@ -1,4 +1,6 @@
 import functools
+from selenium import webdriver
+from bs4 import BeautifulSoup
 #from flask_sqlalchemy import SQLAlchemy
 
 
@@ -76,6 +78,10 @@ def login():
 
 @bp.route("/", methods=("GET", "POST"))
 def index():
+	browser = webdriver.Chrome("./chromedriver")
+	browser.get('https://ntusportscenter.ntu.edu.tw/#/')
+	num = browser.find_element_by_xpath('//*[@id="home_index"]/div[1]/div[1]/div[3]/div/div/div[1]/div[2]/div[2]')
+	print(num.text)
 	if(request.method == 'POST'):
 		if(request.form['submit'] == 'login'):
 			return redirect(url_for('auth.login'))
@@ -116,6 +122,9 @@ def leg():
 def legCheck():
 	return render_template("auth/legCheck.html")
 
+@bp.route("/time", methods=("GET", "POST"))
+def time():
+	return render_template("auth/time.html")
 ##### end #####
 
 @bp.route("/logout")
