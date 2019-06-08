@@ -48,7 +48,7 @@
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">器材報到</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="{{ url_for('auth.leg_check') }}">腿部伸張機</a>
+                        <a class="dropdown-item" href="{{ url_for('auth.legCheck') }}">腿部伸張機</a>
                         <a class="dropdown-item" href="{{ url_for('auth.bottomBodyCheck') }}">深蹲架</a>
                         <a class="dropdown-item" href="#">握推機</a>
                     </div>
@@ -88,11 +88,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>
-        window.jQuery || document.write('<script src="{{ url_for('
-            static ', filename='
-            js / jquery - slim.min.js ') }}"><\/script>')
-    </script>
+
+    <script type=text/javascript src="{{ url_for('static', filename='js/jquery-slim.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/holder.min.js') }}"></script>
