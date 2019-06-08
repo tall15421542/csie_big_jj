@@ -60,7 +60,7 @@ def register():
 			return redirect(url_for('auth.register'))
 		else:
 			print(request.form['username'],"\n", request.form['password'])
-			return redirect(url_for('auth.home'))
+			return redirect(url_for('auth.index'))
 	elif(request.method == 'GET'):
 		return render_template("auth/register.html")
 
@@ -69,13 +69,13 @@ def register():
 @bp.route("/login", methods=("GET", "POST"))
 def login():
 	if(request.method == 'POST'):
-		return redirect(url_for('auth.home'))
+		return redirect(url_for('auth.index'))
 	elif(request.method == 'GET'):
 		return render_template("auth/login.html")
 
 
 @bp.route("/", methods=("GET", "POST"))
-def home():
+def index():
 	if(request.method == 'POST'):
 		if(request.form['submit'] == 'login'):
 			return redirect(url_for('auth.login'))
@@ -86,11 +86,37 @@ def home():
 	
 	return render_template("auth/index.html")
 
-
-@bp.route("/main", methods=("GET", "POST"))
+##### Handle every html file in auth/ #####
+@bp.route("/page1", methods=("GET", "POST"))
 def page1():
 	return render_template("auth/page1.html")
 
+
+@bp.route("/bottomBody", methods=("GET", "POST"))
+def bottomBody():
+	return render_template("auth/bottomBody.html")
+
+@bp.route("/bottomBodyCheck", methods=("GET", "POST"))
+def bottomBodyCheck():
+	return render_template("auth/bottomBodyCheck.html")
+
+@bp.route("/chest", methods=("GET", "POST"))
+def chest():
+	return render_template("auth/chest.html")
+
+@bp.route("/chestCheck", methods=("GET", "POST"))
+def chestCheck():
+	return render_template("auth/chestCheck.html")
+
+@bp.route("/leg", methods=("GET", "POST"))
+def leg():
+	return render_template("auth/leg.html")
+
+@bp.route("/legCheck", methods=("GET", "POST"))
+def legCheck():
+	return render_template("auth/legCheck.html")
+
+##### end #####
 
 @bp.route("/logout")
 def logout():

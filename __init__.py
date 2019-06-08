@@ -18,7 +18,7 @@ def create_app(test_config=None):
 
 	@app.route("/")
 	def to_bp_home():
-		return redirect(url_for('auth.home'))
+		return redirect(url_for('auth.index'))
 
 	
 	return app
