@@ -1,8 +1,14 @@
-import functools
+import functools, threading
 from selenium import webdriver
 from bs4 import BeautifulSoup
-#from flask_sqlalchemy import SQLAlchemy
+from csie_big_jj.user_t import User
+BROWSER_PATH = "/Users/jimmy/Desktop/cnlFinal/csie_big_jj/csie_big_jj/chromedriver"
+browser = webdriver.Chrome(BROWSER_PATH)
 
+MAXDEVICE = 3
+MAXUSER = 100001
+USERS = []
+DEVICES = []
 
 from flask import (
 	Flask,
@@ -19,32 +25,6 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
-'''
-# Create database
-db = SQLAlchemy()
-
-class User(db.Model):
-	name = db.Column(db.String(100))
-	user_id = db.Column(db.String(100)) 
-	password = db.Column(db.String(100))
-	pin = db.Column(db.String(10))
-	
-	def __init__(self, name, user_id, password, pin):
-		self.user_id = user_id
-		self.name = name
-		self.password = password
-		self.pin = pin
-
-database = Flask(__name__)
-database.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
-with database.app_context():
-	db.init_app(current_app)
-	db.create_all()
-	admin = User(name = 'admin', user_id = '0', password = 'admin', pin = '0')
-	db.session.add(admin)
-	db.session.commit()
-	print(User.query.filter_by(username="admin").first())
-'''
 def login_required(view):
     pass 
 
@@ -78,10 +58,12 @@ def login():
 
 @bp.route("/", methods=("GET", "POST"))
 def index():
-	browser = webdriver.Chrome("./chromedriver")
+	#browser = webdriver.Chrome(BROWSER_PATH)
 	browser.get('https://ntusportscenter.ntu.edu.tw/#/')
 	num = browser.find_element_by_xpath('//*[@id="home_index"]/div[1]/div[1]/div[3]/div/div/div[1]/div[2]/div[2]')
-	print(num.text)
+	#print(num.text.split("\n "))
+	#for s in num.text.split("\n "):
+		#print(s)
 	if(request.method == 'POST'):
 		if(request.form['submit'] == 'login'):
 			return redirect(url_for('auth.login'))
@@ -90,7 +72,7 @@ def index():
 		else:
 			pass
 	
-	return render_template("auth/index.html")
+	return render_template("auth/index.html", info=num.text.split("\n "))
 
 ##### Handle every html file in auth/ #####
 @bp.route("/page1", methods=("GET", "POST"))
@@ -131,4 +113,3 @@ def time():
 def logout():
     pass
 
-#db.create_all(bind=none)

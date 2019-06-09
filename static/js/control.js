@@ -49,8 +49,8 @@ function getRandom(x) {
 var leg_database_key = 0
 $("#leg_key_check").on('click', function() {
     if (leg_database_key == $("#input_leg_key").val()) {
-        //window.location.href = "{{ url_for('auth.leg') }}?next={{ request.path }}";
-        window.location.href = /auth/leg;
+        window.location.href = "/auth/leg.html";
+        //window.location.href = /auth/leg;
     } else {
         alert('輸入錯誤喔~~有預約嗎?');
     }
@@ -60,8 +60,8 @@ $("#leg_key_check").on('click', function() {
 var bottom_body_database_key = 0
 $("#bottom_body_key_check").on('click', function() {
     if (bottom_body_database_key == $("#input_bottom_body_key").val()) {
-        //window.location.href = "{{ url_for('auth.bottomBody')}}?next={{ request.path }}";
-        window.location.href = /auth/bottomBody;
+        window.location.href = "/auth/bottomBody.html";
+        //window.location.href = /auth/bottomBody;
     } else {
         alert('輸入錯誤喔~~有預約嗎?');
     }
@@ -71,8 +71,8 @@ $("#bottom_body_key_check").on('click', function() {
 var chest_database_key = 0
 $("#chest_key_check").on('click', function() {
     if (leg_database_key == $("#chest_leg_key").val()) {
-        //window.location.href = "{{ url_for('auth.chest') }}?next={{ request.path }}";
-        window.location.href = /auth/chest;
+        window.location.href = "{{ url_for('auth.chest') }}?next={{ request.path }}";
+        //window.location.href = /auth/chest;
     } else {
         alert('輸入錯誤喔~~有預約嗎?');
     }
