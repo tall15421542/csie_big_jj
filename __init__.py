@@ -9,7 +9,8 @@ def create_app(test_config=None):
 
 	#warning: it is not recommended to set configuration directly
 	app.config["DEBUG"] = False
-	app.config["SECRET_KEY"] = chr(1234)
+	app.config["SECRET_KEY"] = b'_5#y2L"F4Q8z\n\xec]/'
+	app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 	#print(app.config["DEBUG"])
 	#print(app.config["SECRET_KEY"])
 

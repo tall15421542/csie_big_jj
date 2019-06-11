@@ -6,7 +6,7 @@
 # csie_big_jj/
 python3 -m venv venv
 . venv/bin/activate
-pip install Flask
+pip install Flask flask-login flask-wtf
 ```
 
 ### run the app
@@ -15,7 +15,7 @@ pip install Flask
 cd ..
 export FLASK_APP=csie_big_jj
 export FLASK_ENV=development
-flask run
+flask run --no-reload
 ```
 
 ## develop new page

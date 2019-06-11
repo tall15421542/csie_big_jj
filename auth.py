@@ -1,10 +1,11 @@
 import functools, threading, time
 from selenium import webdriver
 from bs4 import BeautifulSoup
-from csie_big_jj.user_t import User
-from flask_login import LoginManager, login_user, login_manager
+from csie_big_jj.user_t import User, Anonymous
+from flask_login import LoginManager, login_user, login_manager, current_user
 import flask_login
 import queue
+from datetime import timedelta
 BROWSER_PATH = "/Users/jimmy/Desktop/cnlFinal/csie_big_jj/csie_big_jj/chromedriver"
 browser = webdriver.Chrome(BROWSER_PATH)
 
@@ -12,8 +13,8 @@ MAXDEVICE = 3
 MAXUSER = 100001
 USERS = []
 DEVICES = [queue.Queue() for i in range(MAXDEVICE)]
-TIMEVAL, DEFAULTTIME = 10, 600
-usercount = 0;
+TIMEVAL, DEFAULTTIME, DEFAULTWAIT = 10, 600, 60
+usercount = 1;
 a = User(name="admin",password="bigjj",userid=65536)
 USERS.append(a)
 ### load users ###
@@ -21,23 +22,32 @@ USERS.append(a)
 
 
 
-def start(user, device_id):
-	user.time = DEFAULTTIME
-	user.device = device_id
-	DEVICES[device_id].put(user)
+def start_wait(user, device_id):
+	b = Book(time = DEFAULTTIME, wait = DEFAULTWAIT, userid = user.id, device = device_id)
+	DEVICES[device_id].put(b)
 
-def end(user):
-	user.time = -1
-	user.device = -1
-	##send notification
+def start(book):
+	book.on = 1
+
+def end(book):
+	if(book.on == 1):
+		send_signal(book.userid, "Sorry you are late, please book again!")
+	elif(book.on == 0):
+		send_signal(book.userid, "Time's up!")
 
 def counter():
 	while True:
+		print("count time")
 		for q in DEVICES:
 			if q.empty() == False:
-				q[0].time -= TIMEVAL;
-				if q[0].time <= 0:
-					end(q.get())
+				if q[0].on == 1:
+					q[0].time -= TIMEVAL
+					if q[0].time <= 0:
+						end(q.get())
+				elif q[0].on == 0:
+					q[0].wait -= TIMEVAL
+					if q[0].wait <= 0:
+						end(q.get())
 		time.sleep(TIMEVAL)
 
 def check_register(user, usercount):
@@ -47,6 +57,7 @@ def check_register(user, usercount):
 	return True
 
 def check_login(name, password):
+	
 	for u in USERS:
 		if(u.name == name):
 			if(u.password == password):
@@ -54,6 +65,8 @@ def check_login(name, password):
 			else:
 				return -1, None
 	return 0, None
+	
+	
 
 from flask import (
 	Flask,
@@ -72,9 +85,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 login_manager = LoginManager()
+login_manager.anonymous_user = Anonymous
 
 @bp.record_once
-def on_load(state):
+def on_load(state):	
     login_manager.init_app(state.app)
 
 
@@ -83,7 +97,9 @@ def login_required(view):
 
 
 @login_manager.user_loader
-def user_loader(name):
+def user_loader(request):
+	print("this is request:",request)
+	name="aa"
 	global USERS
 	find = -1
 	for u in USERS:
@@ -98,7 +114,7 @@ def user_loader(name):
 
 @login_manager.request_loader
 def request_loader(request):
-	name = request.form.get('name')
+	name = request.form.get('username')
 
 	global USERS
 	find = -1
@@ -147,7 +163,9 @@ def login():
 			global USERS
 			status, u = check_login(request.form['username'], request.form['password'])
 			if(status == 1):
-				login_user(u,remember=False, duration=None, force=False, fresh=True)
+				print("login status:", login_user(u,remember=True, duration=timedelta(seconds=60), force=True, fresh=True))
+				#u.is_authenticated = True
+				session[u.name] = u.name
 				print("login successfully")
 				flash('Logged in successfully.')
 				return redirect(url_for('auth.index'))
@@ -163,10 +181,15 @@ def login():
 
 @bp.route("/logout")
 def logout():
-    logout_user()
+	print("logout")
+	session.pop('username', None)
 
 @bp.route("/", methods=("GET", "POST"))
 def index():
+	print("hi")
+	print("logged as user ", current_user.is_authenticated)
+	#print("authen:", current_user._get_current_object().name)
+
 	#browser = webdriver.Chrome(BROWSER_PATH)
 	browser.get('https://ntusportscenter.ntu.edu.tw/#/')
 	num = browser.find_element_by_xpath('//*[@id="home_index"]/div[1]/div[1]/div[3]/div/div/div[1]/div[2]/div[2]')
@@ -199,7 +222,7 @@ def page1():
 			print('no')
 	else:
 		print("get page1")
-	print(flask_login.current_user.name)
+	#print(flask_login.current_user.name)
 	return render_template("auth/page1.html")
 
 
@@ -227,9 +250,9 @@ def leg():
 def legCheck():
 	return render_template("auth/legCheck.html")
 
-@bp.route("/time", methods=("GET", "POST"))
-def time():
-	return render_template("auth/time.html")
 ##### end #####
 
-
+### counter thread ###
+#t = threading.Thread(target=counter, name="routine", daemon=True)
+#t.setDaemon(True)
+#t.start()
