@@ -23,11 +23,11 @@
             <div class="col-4 pt-1">
             </div>
             <div class="col-4 text-center">
-                <a href="../index.html"><img class="blog-header-logo text-dark" src="https://ntusportscenter.ntu.edu.tw/Uploads/admin/80eb9b2b-7a41-4246-96f1-d3cbe71c4d8c.png"></img>
+                <img class="blog-header-logo text-dark" src="https://ntusportscenter.ntu.edu.tw/Uploads/admin/80eb9b2b-7a41-4246-96f1-d3cbe71c4d8c.png" href="#"></img>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
-                <a class="btn btn-sm btn-outline-secondary" href="./signup.html">Sign up</a>
-                <a class="btn btn-sm btn-outline-secondary" href="./login.html">Sign in</a>
+                <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+                <a class="btn btn-sm btn-outline-secondary" href="#">Sign in</a>
             </div>
         </div>
     </header>
@@ -42,7 +42,7 @@
                     <a class="nav-link" href="../index.html">本館資訊 <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="./page1.html">器材租借</a>
+                    <a class="nav-link" href="#">器材租借</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">器材報到</a>
@@ -89,7 +89,7 @@
                                                             <div class="row">
                                                                 <div class="col text-left  text-nowrap">訓練肌群:大腿</div>
                                                                 <div class="col text-nowrap no-gutters">您的預約時間:
-                                                                    <p class="text-nowrap no-gutters" id="reserve_time" style="color:brown">12:20</p>
+                                                                    <p class="text-nowrap no-gutters" id="reserve_time_leg" style="color:brown">12:20</p>
                                                                 </div>
 
                                                             </div>
@@ -134,7 +134,7 @@
                                                             <div class="row">
                                                                 <div class="col text-left  text-nowrap">訓練肌群:下盤</div>
                                                                 <div class="col text-nowrap no-gutters">您的預約時間:
-                                                                    <p class="text-nowrap no-gutters" id="reserve_time" style="color:brown">13:10</p>
+                                                                    <p class="text-nowrap no-gutters" id="reserve_time_bottom" style="color:brown">13:10</p>
                                                                 </div>
 
                                                             </div>
@@ -178,7 +178,7 @@
                                                             <div class="row">
                                                                 <div class="col text-left  text-nowrap">訓練肌群:胸肌</div>
                                                                 <div class="col text-nowrap no-gutters">您的預約時間:
-                                                                    <p class="text-nowrap no-gutters" id="reserve_time" style="color:brown">12:30</p>
+                                                                    <p class="text-nowrap no-gutters" id="reserve_time_chest" style="color:brown">12:30</p>
                                                                 </div>
 
                                                             </div>
@@ -235,7 +235,10 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/holder.min.js"></script>
     <script src="./js/jquery.countdown.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
     <script src="./js/control.js"></script>
+
 
 </body>
 
