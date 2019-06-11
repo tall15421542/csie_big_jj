@@ -1,3 +1,12 @@
+.top {
+    height: 100vh;
+    width: 100%;
+    background-image: url(../../gym.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* filter: blur(1.5px); */
+}
+
 :root {
     --jumbotron-padding-y: 3rem;
 }
@@ -44,7 +53,7 @@
 }
 
 .navbar {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .jumbotron {
@@ -119,4 +128,68 @@ footer p {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+.mid {
+    position: absolute;
+    z-index: 20;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 10vh;
+    display: inline-block;
+    background-color: #fbfcfb;
+    width: 800px;
+    height: 600px;
+    margin: auto;
+    margin-top: 15vh;
+    border-radius: 5px;
+    box-shadow: 1px 1px 6px #fbfcfb;
+    opacity: 0.8;
+}
+
+.mid #intro_text {
+    margin: auto;
+    margin-inline-start: unset;
+    margin-top: 50px;
+}
+
+.mid #name {
+    font-family: fantasy;
+    font-size: 35px;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 4px #000000;
+    color: #00000000;
+}
+
+.mid #topic {
+    text-align: center;
+}
+
+.mid ul {
+    list-style: none;
+    width: 70%;
+    margin: auto;
+    color: #000000;
+    font-size: large;
+    font-weight: 600;
+    line-height: 40px;
+}
+
+.mid a {
+    font-family: Comic Sans MS, arial, helvetica, sans-serif;
+    font-size: 120%;
+}
+
+.mid li {
+    margin: 15px;
+}
+
+.mid li::before {
+    content: '\f00c';
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-left: -1.3em;
+    width: 1.3em;
 }
